@@ -12,6 +12,7 @@ public class BookRepository {
 
     public BookRepository(){
         bookArrayList=new ArrayList<>();
+        bookHashMap=new HashMap<>();
         id=1;
     }
 
