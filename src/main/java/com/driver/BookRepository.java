@@ -5,84 +5,58 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class BookRepository {
-    ArrayList<Book> bookArrayList;
-    HashMap<Integer, Book> bookHashMap;
-    // <id, book>
+    ArrayList<Book>bookList;
     private int id;
 
     public BookRepository(){
-        bookArrayList=new ArrayList<>();
-        bookHashMap=new HashMap<>();
+        bookList=new ArrayList<>();
         id=1;
     }
 
     public Book save(Book book){
-        book.setId(id);
-        bookHashMap.put(id,book);
-        bookArrayList.add(book);
-        id++;
+        book.setId(id++);
+        bookList.add(book);
         return book;
     }
 
     public Book findBookById(int id){
-        for(int i : bookHashMap.keySet()) {
-            if(bookHashMap.containsKey(id)) {
-                return bookHashMap.get(id);
-            }
+        for(Book book : bookList)
+        {
+            if(id== book.getId())
+                return book;
         }
         return null;
     }
 
     public List<Book> findAll(){
-        List<Book> list=new ArrayList<>();
-        for(int i : bookHashMap.keySet()) {
-            list.add(bookHashMap.get(i));
-        }
-        return list;
+        return bookList;
     }
 
     public List<Book> findBooksByAuthor(String author){
-        List<Book> list=new ArrayList<>();
-        for(int i=0;i<bookArrayList.size();i++) {
-            Book b=bookArrayList.get(i);
-            if(b.getAuthor().equals(author)) {
-                list.add(b);
-            }
+        List<Book> listOfBooks=new ArrayList<>();
+        for(Book book : bookList)
+        {
+            if(author.equals(book.getAuthor()))
+                listOfBooks.add(book);
         }
-        return list;
+        return listOfBooks;
     }
 
     public List<Book> findBooksByGenre(String genre){
-        List<Book> list=new ArrayList<>();
-        for(int i=0;i<bookArrayList.size();i++) {
-            Book b=bookArrayList.get(i);
-            if(b.getGenre().equals(genre)) {
-                list.add(b);
-            }
+        List<Book> listOfBooksByGenre=new ArrayList<>();
+        for(Book book: bookList)
+        {
+            if(genre.equals(book.getGenre()))
+                listOfBooksByGenre.add(book);
         }
-        return list;
+        return listOfBooksByGenre;
     }
 
     public void deleteBookById(int id){
-        for(int i=0;i<bookArrayList.size();i++) {
-            if(bookArrayList.get(i).getId()==id) {
-                bookArrayList.remove(i);
-            }
-        }
-        for(int i : bookHashMap.keySet()) {
-            if(i==id) {
-                bookHashMap.remove(i);
-            }
-        }
-        return;
+        bookList.remove(id);
     }
+
     public void deleteAll(){
-        for(int i=0;i<bookArrayList.size();i++) {
-            bookArrayList.remove(i);
-        }
-        for(int i : bookHashMap.keySet()) {
-            bookHashMap.remove(i);
-        }
-        return;
+        bookList.clear();
     }
 }

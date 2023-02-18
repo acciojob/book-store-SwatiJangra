@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BookService {
-    
+
     @Autowired
     BookRepository bookRepository;
 
@@ -16,12 +16,20 @@ public class BookService {
         return bookRepository.save(book);
     }
 
-    public Book findBookById(String id){
-        return bookRepository.findBookById(Integer.parseInt(id));
+    public Book findBookById(int id){
+        return bookRepository.findBookById(id);
+    }
+
+    public void deleteBookById(int id){
+        bookRepository.deleteBookById(id);
     }
 
     public List<Book> findAllBooks(){
         return bookRepository.findAll();
+    }
+
+    public void deleteAllBooks(){
+        bookRepository.deleteAll();
     }
 
     public List<Book> findBooksByAuthor(String author){
@@ -31,16 +39,4 @@ public class BookService {
     public List<Book> findBooksByGenre(String genre){
         return bookRepository.findBooksByGenre(genre);
     }
-
-    public void deleteBookById(String id){
-        bookRepository.deleteBookById(Integer.parseInt(id));
-    }
-
-    public void deleteAllBooks(){
-        bookRepository.deleteAll();
-    }
-
-
-
-
 }
