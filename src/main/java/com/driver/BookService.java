@@ -3,6 +3,7 @@ package com.driver;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,16 +20,8 @@ public class BookService {
         return bookRepository.findBookById(Integer.parseInt(id));
     }
 
-    public void deleteBookById(String id){
-        bookRepository.deleteBookById(Integer.parseInt(id));
-    }
-
     public List<Book> findAllBooks(){
         return bookRepository.findAll();
-    }
-
-    public void deleteAllBooks(){
-        bookRepository.deleteAll();
     }
 
     public List<Book> findBooksByAuthor(String author){
@@ -38,4 +31,16 @@ public class BookService {
     public List<Book> findBooksByGenre(String genre){
         return bookRepository.findBooksByGenre(genre);
     }
+
+    public void deleteBookById(String id){
+        bookRepository.deleteBookById(Integer.parseInt(id));
+    }
+
+    public void deleteAllBooks(){
+        bookRepository.deleteAll();
+    }
+
+
+
+
 }
